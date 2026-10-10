@@ -1,0 +1,322 @@
+[
+  {
+    "id": "p01",
+    "name": "Nova S12",
+    "category": "Smartphones",
+    "price": 329,
+    "emoji": "📱",
+    "tag": "Everyday favorite",
+    "description": "Balanced 5G phone with an all-day battery and AMOLED screen.",
+    "features": [
+      "6.5-inch AMOLED",
+      "128GB storage",
+      "50MP camera"
+    ],
+    "useCases": [
+      "everyday",
+      "budget",
+      "battery"
+    ],
+    "color": "green"
+  },
+  {
+    "id": "p02",
+    "name": "Orbit X Pro",
+    "category": "Smartphones",
+    "price": 479,
+    "emoji": "📱",
+    "tag": "Performance pick",
+    "description": "Smooth gaming and streaming phone with a fast chip and generous storage.",
+    "features": [
+      "120Hz OLED",
+      "256GB storage",
+      "65W charging"
+    ],
+    "useCases": [
+      "gaming",
+      "performance",
+      "streaming"
+    ],
+    "color": "violet"
+  },
+  {
+    "id": "p03",
+    "name": "Mira Mini",
+    "category": "Smartphones",
+    "price": 219,
+    "emoji": "📱",
+    "tag": "Best value",
+    "description": "Simple lightweight phone suited to essentials and calls.",
+    "features": [
+      "Compact build",
+      "128GB storage",
+      "Long battery"
+    ],
+    "useCases": [
+      "students",
+      "budget",
+      "compact"
+    ],
+    "color": "peach"
+  },
+  {
+    "id": "p04",
+    "name": "Luma Camera+",
+    "category": "Smartphones",
+    "price": 599,
+    "emoji": "📱",
+    "tag": "Camera favorite",
+    "description": "Photography-first smartphone with crisp images and rich video.",
+    "features": [
+      "108MP camera",
+      "Optical stabilization",
+      "OLED"
+    ],
+    "useCases": [
+      "photography",
+      "video",
+      "travel"
+    ],
+    "color": "blue"
+  },
+  {
+    "id": "p05",
+    "name": "NexaBook Air 14",
+    "category": "Laptops",
+    "price": 699,
+    "emoji": "💻",
+    "tag": "Student pick",
+    "description": "Thin and portable laptop for coding, study, and office work.",
+    "features": [
+      "14-inch IPS",
+      "16GB RAM",
+      "512GB SSD"
+    ],
+    "useCases": [
+      "students",
+      "coding",
+      "lightweight"
+    ],
+    "color": "mint"
+  },
+  {
+    "id": "p06",
+    "name": "ForgeBook G15",
+    "category": "Laptops",
+    "price": 1199,
+    "emoji": "💻",
+    "tag": "Powerful choice",
+    "description": "Fast gaming laptop suited to demanding workloads.",
+    "features": [
+      "144Hz display",
+      "16GB RAM",
+      "Dedicated graphics"
+    ],
+    "useCases": [
+      "gaming",
+      "editing",
+      "performance"
+    ],
+    "color": "rose"
+  },
+  {
+    "id": "p07",
+    "name": "NexaBook Lite",
+    "category": "Laptops",
+    "price": 449,
+    "emoji": "💻",
+    "tag": "Budget friendly",
+    "description": "Reliable entry-level laptop for documents, online learning and browsing.",
+    "features": [
+      "14-inch FHD",
+      "8GB RAM",
+      "256GB SSD"
+    ],
+    "useCases": [
+      "budget",
+      "students",
+      "browsing"
+    ],
+    "color": "green"
+  },
+  {
+    "id": "p08",
+    "name": "StudioBook Pro 16",
+    "category": "Laptops",
+    "price": 1499,
+    "emoji": "💻",
+    "tag": "Creator ready",
+    "description": "Large-screen creative laptop for design and serious multitasking.",
+    "features": [
+      "2.5K screen",
+      "32GB RAM",
+      "1TB SSD"
+    ],
+    "useCases": [
+      "design",
+      "editing",
+      "creators"
+    ],
+    "color": "violet"
+  },
+  {
+    "id": "p09",
+    "name": "EchoPods Air",
+    "category": "Audio",
+    "price": 79,
+    "emoji": "🎧",
+    "tag": "Everyday audio",
+    "description": "Compact wireless earbuds for commutes, music and calls.",
+    "features": [
+      "Wireless earbuds",
+      "24-hour case",
+      "Touch controls"
+    ],
+    "useCases": [
+      "music",
+      "commute",
+      "budget"
+    ],
+    "color": "peach"
+  },
+  {
+    "id": "p10",
+    "name": "Hush ANC 700",
+    "category": "Audio",
+    "price": 249,
+    "emoji": "🎧",
+    "tag": "Noise canceling",
+    "description": "Comfortable over-ear headphones that reduce distracting background noise.",
+    "features": [
+      "Active noise canceling",
+      "35-hour battery",
+      "Multipoint"
+    ],
+    "useCases": [
+      "noise cancelling",
+      "travel",
+      "office"
+    ],
+    "color": "blue"
+  },
+  {
+    "id": "p11",
+    "name": "Pulse Speaker Go",
+    "category": "Audio",
+    "price": 119,
+    "emoji": "🔊",
+    "tag": "Travel ready",
+    "description": "Small portable Bluetooth speaker with lively sound.",
+    "features": [
+      "Bluetooth 5.3",
+      "Water-resistant",
+      "12-hour playtime"
+    ],
+    "useCases": [
+      "outdoors",
+      "music",
+      "travel"
+    ],
+    "color": "mint"
+  },
+  {
+    "id": "p12",
+    "name": "Tabora 11",
+    "category": "Tablets",
+    "price": 389,
+    "emoji": "▣",
+    "tag": "Study companion",
+    "description": "Tablet for digital notes, streaming and easy reading.",
+    "features": [
+      "11-inch 2K",
+      "128GB",
+      "Stylus support"
+    ],
+    "useCases": [
+      "notes",
+      "students",
+      "streaming"
+    ],
+    "color": "rose"
+  },
+  {
+    "id": "p13",
+    "name": "Tabora Pro 13",
+    "category": "Tablets",
+    "price": 749,
+    "emoji": "▣",
+    "tag": "Creative canvas",
+    "description": "Premium tablet for drawing and visual work.",
+    "features": [
+      "13-inch display",
+      "256GB",
+      "Pen compatible"
+    ],
+    "useCases": [
+      "drawing",
+      "design",
+      "art"
+    ],
+    "color": "green"
+  },
+  {
+    "id": "p14",
+    "name": "VibeWatch S",
+    "category": "Wearables",
+    "price": 149,
+    "emoji": "⌚",
+    "tag": "Stay active",
+    "description": "Everyday smartwatch for fitness and notifications.",
+    "features": [
+      "Heart rate tracking",
+      "Sleep insights",
+      "7-day battery"
+    ],
+    "useCases": [
+      "fitness",
+      "health",
+      "daily"
+    ],
+    "color": "violet"
+  },
+  {
+    "id": "p15",
+    "name": "TrailWatch Pro",
+    "category": "Wearables",
+    "price": 299,
+    "emoji": "⌚",
+    "tag": "Outdoor favorite",
+    "description": "Adventure watch with on-device GPS and exercise tracking.",
+    "features": [
+      "Built-in GPS",
+      "Water resistant",
+      "14-day battery"
+    ],
+    "useCases": [
+      "running",
+      "hiking",
+      "outdoors"
+    ],
+    "color": "peach"
+  },
+  {
+    "id": "p16",
+    "name": "SnapCam Pocket",
+    "category": "Cameras",
+    "price": 429,
+    "emoji": "📷",
+    "tag": "Creator choice",
+    "description": "Compact camera for casual vlogs, travel and photos.",
+    "features": [
+      "4K video",
+      "Flip screen",
+      "Optical zoom"
+    ],
+    "useCases": [
+      "vlogging",
+      "travel",
+      "photography"
+    ],
+    "color": "blue"
+  }
+]
