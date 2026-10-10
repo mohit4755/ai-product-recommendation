@@ -9,6 +9,9 @@ A professional React + Python FastAPI + Google Gemini product recommendation ass
 - Server-side validation removes unknown IDs, repeated products and products over an explicit USD budget.
 - Recommended products are displayed and filtered in the React UI.
 - Error messages, loading state, example prompts, category and text filters, mobile-friendly design.
+- **AI Compare:** Select 2–3 products to generate grounded trade-offs and a best-fit recommendation using a separate Gemini structured-output endpoint.
+- **Saved Favorites:** Bookmark products in browser localStorage and filter saved items.
+- **AI Refinement:** Click lower-price, better-battery or more-performance chips to rerun recommendations using revised preferences.
 
 **Important:** All sample product brands, descriptions and prices are fictional. This is not real-time shopping inventory.
 
