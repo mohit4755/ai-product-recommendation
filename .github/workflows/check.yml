@@ -25,4 +25,4 @@ jobs:
       - name: Test demo product data
         run: python tests/test_catalog.py
       - name: Import FastAPI server and verify routes
-        run: python -c "from backend.engine import app; assert any(r.path == '/api/recommend' for r in app.routes); print('Recommendation API route found')"
+        run: python -c "from backend.engine import app; assert all(any(r.path == p for r in app.routes) for p in ['/api/recommend','/api/compare','/api/understand']); print('Recommendation API route found')"

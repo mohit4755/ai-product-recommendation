@@ -49,3 +49,7 @@ Deploy, then test \`https://YOUR-DEPLOYMENT.vercel.app/api/health\` and a real A
 \`src/App.jsx\` React → \`/api/recommend\` FastAPI → Google Gemini (Pydantic structured output) → catalog ID and budget validation → recommended product cards.
 
 The AI can select only products from \`catalog/products.json\`; all returned product details are loaded from that file, not invented by AI. This is a demo, so no payment flow, user authentication, or live retailer prices.
+
+## Extra GenAI showcase
+
+**AI Preference Intelligence** uses a separate Gemini endpoint (`POST /api/understand`) with Pydantic JSON structured extraction: identifies category, intended use, requested features, and optional clarification. An explicit upper budget is independently checked by Python rather than trusting invented prices. It is optional so the core recommendation flow remains unchanged.

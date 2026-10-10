@@ -53,6 +53,9 @@ export default function App() {
   const [compareIds, setCompareIds] = useState([]);
   const [comparison, setComparison] = useState(null);
   const [compareLoading, setCompareLoading] = useState(false);
+  const [brief, setBrief] = useState(null);
+  const [briefLoading, setBriefLoading] = useState(false);
+  const [briefError, setBriefError] = useState("");
   const [compareError, setCompareError] = useState("");
   const [comparisonNotice, setComparisonNotice] = useState("");
 
@@ -87,6 +90,20 @@ export default function App() {
     finally { setLoading(false); }
   }
 
+  async function understandNeeds() {
+    const text=preference.trim();
+    if (text.length<8) {setBriefError("Enter at least 8 characters.");return;}
+    if (briefLoading) return;
+    setBriefLoading(true);setBriefError("");setBrief(null);
+    try {
+      const res=await fetch("/api/understand",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({preference:text})});
+      const data=await res.json().catch(()=>null);
+      if(!res.ok) throw Error(typeof data?.detail==="string"?data.detail:"Preference analysis unavailable.");
+      if(!data || typeof data.category!=="string" || !Array.isArray(data.mustHave)) throw Error("Invalid AI response.");
+      setBrief(data);
+    } catch (err) {setBriefError(err.message||"Preference analysis unavailable.");}
+    finally {setBriefLoading(false);}
+  }
   function showAll() {setMatchesOnly(false);setSavedOnly(false);setCategory("All products");setQuery("");}
   function toggleFavorite(id) {
     const updated = favorites.includes(id) ? favorites.filter(x => x !== id) : [...favorites, id];
@@ -132,10 +149,13 @@ export default function App() {
         <div className="assistant-heading"><span className="sparkle-icon">✦</span><div><div className="small-label">YOUR PERSONAL SHOPPING ASSISTANT</div><h2>What are you looking for?</h2><p>Be as specific as you like — budget, features, or how you plan to use it.</p></div></div>
         <form className="preference-form" onSubmit={findMatches}>
           <label className="sr-only" htmlFor="preference">Describe your ideal product</label>
-          <textarea id="preference" value={preference} maxLength={500} disabled={loading} rows={3} onChange={e=>{setPreference(e.target.value);setError("");}} placeholder="e.g. I need a gaming phone under $500 with great battery life..."/>
+          <textarea id="preference" value={preference} maxLength={500} disabled={loading} rows={3} onChange={e=>{setPreference(e.target.value);setError("");setBrief(null);setBriefError("");}} placeholder="e.g. I need a gaming phone under $500 with great battery life..."/>
           <div className="form-actions"><span>✦ Describe your ideal product in your own words</span><button className="primary-btn" disabled={!preference.trim() || loading} type="submit">{loading ? "Finding matches..." : "Find my matches ↗"}</button></div>
         </form>
-        <div className="suggestions"><strong>TRY AN EXAMPLE</strong><div>{IDEAS.map(idea=><button type="button" disabled={loading} key={idea} onClick={()=>{setPreference(idea);setError("");}}>{idea} ↗</button>)}</div></div>
+        <div className="suggestions"><strong>TRY AN EXAMPLE</strong><div>{IDEAS.map(idea=><button type="button" disabled={loading} key={idea} onClick={()=>{setPreference(idea);setError("");setBrief(null);setBriefError("");}}>{idea} ↗</button>)}</div></div>
+        <div className="intent-action"><div><strong>✦ AI Preference Intelligence</strong><p>Let Gemini explain what it understood from your shopping request.</p></div><button type="button" disabled={briefLoading||!preference.trim()} onClick={understandNeeds}>{briefLoading?"Understanding...":"Analyze my preferences ↗"}</button></div>
+        {briefError && <p className="message warning" role="alert">{briefError}</p>}
+        {brief && <section className="intent-panel" aria-live="polite"><small>✦ STRUCTURED AI EXTRACTION</small><h3>Your shopping brief</h3><div className="intent-fields"><div><small>CATEGORY</small><b>{brief.category}</b></div><div><small>BUDGET LIMIT</small><b>{brief.maxBudget!=null?money(brief.maxBudget):"Not specified"}</b></div><div><small>USE CASE</small><b>{brief.useCase}</b></div></div><div className="intent-tags"><strong>MUST-HAVE FEATURES</strong><div>{brief.mustHave.length?brief.mustHave.map(x=><span key={x}>{x}</span>):<span>No specific features requested</span>}</div></div>{brief.clarification&&<p className="intent-question">✦ {brief.clarification}</p>}<p className="intent-footnote">Gemini structured JSON + Python budget validation. Interpretation may be imperfect.</p></section>}
         {loading && <div className="message info" role="status">✦ Gemini is comparing your preferences with the catalog...</div>}
         {error && <div className="message warning" role="alert">⚠ {error} <button aria-label="Dismiss error" onClick={()=>setError("")}>×</button></div>}
         {response && !loading && <>
