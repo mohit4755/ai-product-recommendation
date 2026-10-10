@@ -112,7 +112,20 @@ export default function App() {
     } catch (err) {setBriefError(err.message||"Preference analysis unavailable.");}
     finally {setBriefLoading(false);}
   }
-  function showAll() {setMatchesOnly(false);setSavedOnly(false);setCategory("All products");setQuery("");}
+  function showAll() {
+    setMatchesOnly(false);
+    setSavedOnly(false);
+    setCategory("All products");
+    setQuery("");
+    // After React applies the unfiltered catalog, bring it into view.
+    requestAnimationFrame(() => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.getElementById("products")?.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  }
   function toggleFavorite(id) {
     const updated = favorites.includes(id) ? favorites.filter(x => x !== id) : [...favorites, id];
     setFavorites(updated);
@@ -172,7 +185,7 @@ export default function App() {
             <div className="instant-results">
               <div className="instant-results-header">
                 <div><span className="small-label">✦ RECOMMENDED FOR YOU</span><h3>Your best matches, right here.</h3><p>No more searching through the full catalog — these are Gemini's picks based on your preferences.</p></div>
-                <a href="#products" className="browse-more">Explore catalog ↓</a>
+                <button type="button" className="browse-more" onClick={showAll}>Explore catalog ↓</button>
               </div>
               <div className="instant-results-grid">
                 {response.recommendations.map(({product, reason}) => (
