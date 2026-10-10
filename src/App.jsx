@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import products from "../catalog/products.json";
 
 const CATEGORIES = ["All products", ...new Set(products.map(p => p.category))];
@@ -58,6 +58,14 @@ export default function App() {
   const [briefError, setBriefError] = useState("");
   const [compareError, setCompareError] = useState("");
   const [comparisonNotice, setComparisonNotice] = useState("");
+  const recommendationRef = useRef(null);
+
+  // Bring new recommendations into view when a Gemini response arrives.
+  useEffect(() => {
+    if (!response || loading || !recommendationRef.current) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    recommendationRef.current.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+  }, [response, loading]);
 
   const reasons = useMemo(() => new Map((response?.recommendations || []).map(item => [item.product.id, item.reason])), [response]);
   const visible = useMemo(() => {
@@ -159,7 +167,28 @@ export default function App() {
         {loading && <div className="message info" role="status">✦ Gemini is comparing your preferences with the catalog...</div>}
         {error && <div className="message warning" role="alert">⚠ {error} <button aria-label="Dismiss error" onClick={()=>setError("")}>×</button></div>}
         {response && !loading && <>
-          <div className="result-notice"><span className="sparkle-icon">✦</span><div><small>YOUR AI SHOPPING SHORTLIST</small><h3>{response.recommendations.length} recommended product{response.recommendations.length === 1 ? "" : "s"}</h3><p>{response.summary}</p></div><button type="button" onClick={showAll}>See all products ↗</button></div>
+          <div className="result-notice" ref={recommendationRef}><span className="sparkle-icon">✦</span><div><small>YOUR AI SHOPPING SHORTLIST</small><h3>{response.recommendations.length} recommended product{response.recommendations.length === 1 ? "" : "s"}</h3><p>{response.summary}</p></div><button type="button" onClick={showAll}>See all products ↗</button></div>
+          {response.recommendations.length > 0 && (
+            <div className="instant-results">
+              <div className="instant-results-header">
+                <div><span className="small-label">✦ RECOMMENDED FOR YOU</span><h3>Your best matches, right here.</h3><p>No more searching through the full catalog — these are Gemini's picks based on your preferences.</p></div>
+                <a href="#products" className="browse-more">Explore catalog ↓</a>
+              </div>
+              <div className="instant-results-grid">
+                {response.recommendations.map(({product, reason}) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    reason={reason}
+                    favorite={favorites.includes(product.id)}
+                    compared={compareIds.includes(product.id)}
+                    onFavorite={toggleFavorite}
+                    onCompare={toggleCompare}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
           <div className="refine-bar"><span>✦ REFINE WITH AI</span>{REFINE_OPTIONS.map(item=><button key={item.label} type="button" onClick={()=>refine(item.instruction)} disabled={loading}>{item.label} ↗</button>)}</div>
         </>}
       </div></section>
